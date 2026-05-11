@@ -1,0 +1,151 @@
+{
+  "manifest_version": 3,
+  "name": "FastApply AI",
+  "version": "1.0.0",
+  "description": "Smart job application autofill engine.",
+  "action": {
+    "default_title": "FastApply Quick Access",
+    "default_popup": "popup.html"
+  },
+  "options_page": "index.html",
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.lever.co/*"
+      ],
+      "js": [
+        "utils.js",
+        "lever.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.greenhouse.io/*",
+        "https://boards.greenhouse.io/*"
+      ],
+      "js": [
+        "utils.js",
+        "greenhouse.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://jobs.ashbyhq.com/*",
+        "https://*.ashbyhq.com/*"
+      ],
+      "js": [
+        "utils.js",
+        "ashby.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.bamboohr.com/careers/*",
+        "https://*.bamboohr.com/jobs/*"
+      ],
+      "js": [
+        "utils.js",
+        "bamboohr.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.rippling-ats.com/*",
+        "https://*.rippling.com/*"
+      ],
+      "js": [
+        "utils.js",
+        "rippling.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.myworkdayjobs.com/*"
+      ],
+      "js": [
+        "utils.js",
+        "workday-orchestrator.js",
+        "workday-personal.js",
+        "workday-experience.js",
+        "workday-experience-work.js",
+        "workday-experience-education.js",
+        "workday-experience-skills.js",
+        "workday-eeo.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": [
+        "https://*.lever.co/*",
+        "https://*.greenhouse.io/*",
+        "https://boards.greenhouse.io/*",
+        "https://jobs.ashbyhq.com/*",
+        "https://*.ashbyhq.com/*",
+        "https://*.bamboohr.com/*",
+        "https://*.rippling-ats.com/*",
+        "https://*.rippling.com/*",
+        "https://*.myworkdayjobs.com/*"
+      ],
+      "js": ["utils.js", "generic.js"],
+
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.smartrecruiters.com/*",
+        "https://jobs.smartrecruiters.com/*",
+        "https://careers.smartrecruiters.com/*"
+      ],
+      "js": [
+        "utils.js",
+        "smartrecruiters-engine.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.eightfold.ai/*",
+        "https://app.eightfold.ai/*"
+      ],
+      "js": [
+        "utils.js",
+        "eightfold-engine.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "sidePanel",
+    "clipboardWrite",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:5000/*",
+    "http://localhost:5173/*",
+    "<all_urls>"
+  ]
+}
